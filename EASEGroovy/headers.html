@@ -1,0 +1,90 @@
+
+<h2><span class="mw-headline" id="Script_Locations">Script Locations</span></h2>
+<a href="https://wiki.eclipse.org/EASE/Scripts">Original Source</a>
+<p>An alternate way to manage your scripts is to provide locations, where EASE can parse for scripts. You may add such locations in the preferences / Scripting / Script Locations. Currently we support workspace folders, file system paths, http URIs to some extent and platfom:/plugin URIs. In the future additional URIs will be supported like ftp, ...
+EASE searches those locations on a regular basis and displays found scripts in the Scripts Explorer View. From there you may edit or execute them directly. Furthermore you may access such scripts using the script:// scheme.
+The Script Shell View is capable of recording your actions and store them to the default Script Location. Recording can be enabled in the view toolbar.
+</p><p>Scripts support magic headers, a comment section at the very beginning of the file containing key:value pairs. Changes are reflected immediately for workspace resources or after a refresh triggered in the Script Explorer view.
+Supported keys are:
+</p>
+<table class="wikitable">
+<tr>
+<th> Key
+</th>
+<th> Description
+</th></tr>
+<tr>
+<td>name
+</td>
+<td>Script name displayed. May use / to create folder structures. Defaults to the filename.
+</td></tr>
+<tr>
+<td>description
+</td>
+<td>Script description. Used as a tooltip on the script.
+</td></tr>
+<tr>
+<td>toolbar
+</td>
+<td>Bind a script to a view toolbar. Provide either view ID or view title (eg <i>Project Explorer</i>).
+</td></tr>
+<tr>
+<td>menu
+</td>
+<td>Bind a script to a view menu. Provide either view ID or view title (eg <i>Project Explorer</i>).
+</td></tr>
+<tr>
+<td>popup
+</td>
+<td>Bind a script to a popup menu. Add an expression like enableFor(full.qualified.class.name). If the selection is an instance from that type or adaptable to it, the popup menu will be added.
+</td></tr>
+<tr>
+<td>keyboard
+</td>
+<td>Binds a script to a keyboard shortcut. Syntax for keyboard mappings is the same as in the 'Keys' preferences page.
+</td></tr>
+<tr>
+<td>image
+</td>
+<td>Add a dedicated toolbar/menu image. Accepts local file paths, relative paths (according to the script file) or URIs. Accepted URI schemes are http;//, platform:/plugin, workspace://, file://
+</td></tr>
+<tr>
+<td>script-type
+</td>
+<td>Script type of this source. Typically the type is denoted from the file extension. This keyword explicitely sets the type.
+</td></tr>
+<tr>
+<td>script-engine
+</td>
+<td>Comma separated list of engine IDs of valid engines for this script. Preceeding an engine with&#160;! explicitely disables an engine ID.
+</td></tr>
+<tr>
+<td>io
+</td>
+<td>Define where IO comes from/goes to: 'system' uses System.out/err/in; 'none' no IO at all; any other uses a console
+</td></tr>
+<tr>
+<td>onStartup
+</td>
+<td>Run a script on Eclipse/RCP startup. If an integer parameter is provided, it denotes the script startup delay in seconds.
+</td></tr>
+<tr>
+<td>onShutdown
+</td>
+<td>Run a script on Eclipse/RCP shutdown. If an integer parameter is provided, it denotes the maximum script execution time in seconds (defaults to 10s).
+</td></tr>
+<tr>
+<td>onSave
+</td>
+<td>Run a script on an editor save action. A wildcard pattern may be used to denote on which files a the script should trigger (eg: '*.js'). Parameter argv[0] holds the resource description of the saved file.
+</td></tr>
+<tr>
+<td>onResourceChange
+</td>
+<td>Run a script on a resource change in the workspace. A wildcard pattern may be used to denote on which files a the script should trigger (eg: '*.js'). Parameter argv[0] holds the resource description of the changed file, argv[1] the type of the change.
+</td></tr>
+<tr>
+<td>onEventBus
+</td>
+<td>Run scripts when a specific event is posted on the OSGI message bus. Accepts a channel identifier for broker subscription (* wildcards may be used). The event will be passed to the script as variable 'event'.
+</td></tr></table>
